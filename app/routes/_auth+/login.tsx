@@ -259,7 +259,7 @@ export default function LoginPage() {
 		<div className="flex min-h-full flex-col justify-center pb-32 pt-20">
 			<div className="mx-auto w-full max-w-md">
 				<div className="flex flex-col gap-3 text-center">
-					<h1 className="text-h1">Welcome back!</h1>
+					<h1 className="text-h1">Welcome!</h1>
 					<p className="text-body-md text-muted-foreground">
 						Please enter your details.
 					</p>
@@ -316,7 +316,7 @@ export default function LoginPage() {
 
 							<div className="flex items-center justify-between gap-6 pt-3">
 								<StatusButton
-									className="w-full"
+									className="w-full bg-orange-500"
 									status={isPending ? 'pending' : actionData?.status ?? 'idle'}
 									type="submit"
 									disabled={isPending}
@@ -325,17 +325,6 @@ export default function LoginPage() {
 								</StatusButton>
 							</div>
 						</Form>
-						<ul className="mt-5 flex flex-col gap-5 border-b-2 border-t-2 border-border py-3">
-							{providerNames.map(providerName => (
-								<li key={providerName}>
-									<ProviderConnectionForm
-										type="Login"
-										providerName={providerName}
-										redirectTo={redirectTo}
-									/>
-								</li>
-							))}
-						</ul>
 						<div className="flex items-center justify-center gap-2 pt-6">
 							<span className="text-muted-foreground">New here?</span>
 							<Link

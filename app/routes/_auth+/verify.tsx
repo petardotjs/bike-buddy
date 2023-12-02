@@ -302,7 +302,7 @@ export default function VerifyRoute() {
 							})}
 						/>
 						<StatusButton
-							className="w-full"
+							className="w-full bg-orange-500"
 							status={isPending ? 'pending' : actionData?.status ?? 'idle'}
 							type="submit"
 							disabled={isPending}
