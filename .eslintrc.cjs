@@ -1,5 +1,3 @@
-const vitestFiles = ['app/**/__tests__/**/*', 'app/**/*.{spec,test}.*']
-const testFiles = ['**/tests/**', ...vitestFiles]
 const appFiles = ['app/**']
 
 /** @type {import('@types/eslint').Linter.BaseConfig} */
@@ -41,7 +39,6 @@ module.exports = {
 		{
 			plugins: ['remix-react-routes'],
 			files: appFiles,
-			excludedFiles: testFiles,
 			rules: {
 				'remix-react-routes/use-link-for-routes': 'error',
 				'remix-react-routes/require-valid-paths': 'error',
@@ -67,7 +64,6 @@ module.exports = {
 		},
 		{
 			extends: ['@remix-run/eslint-config/jest-testing-library'],
-			files: vitestFiles,
 			rules: {
 				'testing-library/no-await-sync-events': 'off',
 				'jest-dom/prefer-in-document': 'off',
