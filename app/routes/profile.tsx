@@ -33,20 +33,20 @@ export default function Profile() {
 	if (user) {
 		return (
 			<div className="flex h-[100dvh] flex-col">
-				<header className="flex justify-end gap-[10px] bg-orange-500 px-[5%] pt-[5%]">
-					<Icon name="shopping-cart" className="h-[25px] w-[25px]" />
-					<Icon name="gear" className="h-[25px] w-[25px]" />
-				</header>
-				<main>
+				<header className="flex flex-col">
+					<span className="flex justify-end gap-[10px] bg-orange-500 px-[5%] pt-[5%] text-white">
+						<Icon name="shopping-cart" className="h-[25px] w-[25px]" />
+						<Icon name="gear" className="h-[25px] w-[25px]" />
+					</span>
 					<div className="relative top-[-1px] flex items-center gap-[20px] rounded-b-lg bg-orange-500 px-[5%] pb-[100px]">
 						<img
 							src="/user.png"
 							alt="Default user avatar"
 							className="h-[50px] w-[50px] rounded-full border-[1px] border-gray-500"
 						/>
-						<div className="flex flex-col">
-							<span>{user.name}</span>
-							<span className="flex gap-[7px]">
+						<div className="flex flex-col text-white">
+							<span className="font-bold">{user.name}</span>
+							<span className="flex items-center gap-[7px]">
 								<Icon name="wallet" />
 								<span>${user.balance}</span>
 							</span>
@@ -70,27 +70,29 @@ export default function Profile() {
 							<span>Gallery</span>
 						</span>
 					</div>
+				</header>
+				<main className="flex h-[0] flex-grow flex-col justify-evenly">
 					<div className="flex flex-col gap-[7px] px-[5%]">
-						<span className="font-oswald font-bold">MY ACTIVITY</span>
-						<span className="flex gap-[10px]">
+						<span className="font-oswald text-lg font-bold">MY ACTIVITY</span>
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="magnifying-glass" className="h-[25px] w-[25px]" />
 							Rent Bike
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="heart" className="h-[25px] w-[25px]" /> Wishlist
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="star" className="h-[25px] w-[25px]" /> Rating Best
 							Routes
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon
 								name="counter-clockwise-clock"
 								className="h-[25px] w-[25px]"
 							/>
 							Last Seen Routes
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon
 								name="counter-clockwise-clock"
 								className="h-[25px] w-[25px]"
@@ -99,24 +101,24 @@ export default function Profile() {
 						</span>
 					</div>
 					<div className="flex flex-col gap-[7px] px-[5%]">
-						<span className="font-oswald font-bold">OTHER</span>
-						<span className="flex gap-[10px]">
+						<span className="font-oswald text-lg font-bold">OTHER</span>
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="chat-bubble" className="h-[25px] w-[25px]" /> Chat
 							with Customer Service
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="help-circle" className="h-[25px] w-[25px]" /> Help
 							center
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="info" className="h-[25px] w-[25px]" /> Info
 						</span>
-						<span className="flex gap-[10px]">
+						<span className="flex gap-[10px] text-lg">
 							<Icon name="mobile" className="h-[25px] w-[25px]" /> About App
 						</span>
 					</div>
 				</main>
-				<footer className="flex h-[50px] justify-between px-[5%] pb-[5%]">
+				<footer className="mx-[5%] mb-[5%] flex h-[50px] justify-between">
 					<NavLink
 						to="/"
 						className={({ isActive }) => {
