@@ -15,6 +15,9 @@ export default {
 				'2xl': '1400px',
 			},
 		},
+		fontFamily: {
+			oswald: ['Oswald'],
+		},
 		extend: {
 			...extendedTheme,
 			fontFamily: {

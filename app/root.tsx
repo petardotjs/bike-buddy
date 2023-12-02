@@ -82,6 +82,12 @@ export const links: LinksFunction = () => {
 		{ rel: 'icon', type: 'image/svg+xml', href: '/favicons/favicon.svg' },
 		{ rel: 'stylesheet', href: fontStyleSheetUrl },
 		{ rel: 'stylesheet', href: tailwindStyleSheetUrl },
+		{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+		{ rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+		{
+			rel: 'stylesheet',
+			href: 'https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap',
+		},
 		cssBundleHref ? { rel: 'stylesheet', href: cssBundleHref } : null,
 	].filter(Boolean)
 }
@@ -232,7 +238,7 @@ function App() {
 
 	return (
 		<Document nonce={nonce} env={data.ENV}>
-			<div className="flex h-screen flex-col justify-between">
+			<div className="flex h-[100dvh] flex-col p-[5%]">
 				<Outlet />
 			</div>
 		</Document>
@@ -250,27 +256,8 @@ function AppWithProviders() {
 
 export default withSentry(AppWithProviders)
 
-/**
- * @returns the user's theme preference, or the client hint theme if the user
- * has not set a preference.
- */
-
-/**
- * If the user's changing their theme mode preference, this will return the
- * value it's being changed to.
- */
-
 export function ErrorBoundary() {
-	// the nonce doesn't rely on the loader so we can access that
 	const nonce = useNonce()
-
-	// NOTE: you cannot use useLoaderData in an ErrorBoundary because the loader
-	// likely failed to run so we have to do the best we can.
-	// We could probably do better than this (it's possible the loader did run).
-	// This would require a change in Remix.
-
-	// Just make sure your root route never errors out and you'll always be able
-	// to give the user a better UX.
 
 	return (
 		<Document nonce={nonce}>

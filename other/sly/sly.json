@@ -3,9 +3,27 @@
   "libraries": [
     {
       "name": "@radix-ui/icons",
-      "directory": "./other/svg-icons",
-      "postinstall": ["npm", "run", "build:icons"],
-      "transformers": ["transform-icon.ts"]
+      "directory": "other/icons",
+      "postinstall": [],
+      "transformers": []
+    },
+    {
+      "name": "lucide-icons",
+      "directory": "./other/icons",
+      "postinstall": [],
+      "transformers": []
+    },
+    {
+      "name": "iconoir",
+      "directory": "other/icons",
+      "postinstall": [],
+      "transformers": []
+    },
+    {
+      "name": "simple-icons",
+      "directory": "other/icons",
+      "postinstall": [],
+      "transformers": []
     }
   ]
 }
