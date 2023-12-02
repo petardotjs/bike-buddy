@@ -2,6 +2,7 @@
 
 export type IconName =
 	| 'bell'
+	| 'filter'
 	| 'footprints'
 	| 'heart'
 	| 'home'

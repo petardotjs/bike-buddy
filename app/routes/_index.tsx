@@ -33,9 +33,9 @@ export default function Index() {
 			<div className="flex items-center justify-between">
 				<span className="text-lg">bikebuddy</span>
 				<div className="flex gap-[10px]">
-					<Icon name="heart" className="h-[25px] w-[25px]" />
-					<Icon name="shopping-cart" className="h-[25px] w-[25px]" />
-					<Icon name="bell" className="h-[25px] w-[25px]" />
+					<Icon name="heart" className="h-[3px] w-[30px]" />
+					<Icon name="shopping-cart" className="h-[30px] w-[30px]" />
+					<Icon name="bell" className="h-[30px] w-[30px]" />
 				</div>
 			</div>
 			<div className="flex gap-[20px]">
@@ -109,7 +109,7 @@ export default function Index() {
 			</div>
 			<footer className="flex h-[50px] justify-between">
 				<NavLink
-					to="."
+					to="/"
 					className={({ isActive }) => {
 						return isActive
 							? 'flex w-[50px] items-center justify-center rounded-sm bg-orange-200 text-orange-500'
