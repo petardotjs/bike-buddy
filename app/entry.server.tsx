@@ -1,6 +1,7 @@
 import { PassThrough } from 'stream'
 import {
 	createReadableStreamFromReadable,
+	json,
 	type DataFunctionArgs,
 	type HandleDocumentRequestFunction,
 } from '@remix-run/node'
@@ -12,6 +13,31 @@ import { renderToPipeableStream } from 'react-dom/server'
 import { getEnv, init } from './utils/env.server.ts'
 import { NonceProvider } from './utils/nonce-provider.ts'
 import { makeTimings } from './utils/timing.server.ts'
+import { setupServer } from 'msw/node'
+import { http, HttpResponse, passthrough } from 'msw'
+import { faker } from '@faker-js/faker'
+
+const server = setupServer(
+	http.post('https://api.resend.com/emails', async ({ request }) => {
+		const body = await request.json()
+		const response = HttpResponse.json({ status: 'success' })
+		console.info({ body })
+		console.info(response.status)
+
+		return json({
+			id: faker.string.uuid(),
+			created_at: new Date().toISOString(),
+		})
+	}),
+	http.post(`http://localhost:3001/ping`, () => {
+		return passthrough()
+	}),
+)
+server.listen({
+	onUnhandledRequest: req => {
+		console.warn(`Unhandled ${req.method} request to ${req.url}.`)
+	},
+})
 
 const ABORT_DELAY = 5000
 

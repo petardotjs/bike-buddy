@@ -14,7 +14,6 @@ import {
 	requireUserId,
 	verifyUserPassword,
 } from '#app/utils/auth.server.ts'
-import { validateCSRF } from '#app/utils/csrf.server.ts'
 import { prisma } from '#app/utils/db.server.ts'
 import { useIsPending } from '#app/utils/misc.tsx'
 import { redirectWithToast } from '#app/utils/toast.server.ts'
@@ -62,7 +61,6 @@ export async function action({ request }: DataFunctionArgs) {
 	const userId = await requireUserId(request)
 	await requirePassword(userId)
 	const formData = await request.formData()
-	await validateCSRF(formData, request.headers)
 	const submission = await parse(formData, {
 		async: true,
 		schema: ChangePasswordForm.superRefine(

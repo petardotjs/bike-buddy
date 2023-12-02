@@ -24,6 +24,12 @@
       "directory": "other/icons",
       "postinstall": [],
       "transformers": []
+    },
+    {
+      "name": "tabler-icons",
+      "directory": "other/icons",
+      "postinstall": [],
+      "transformers": []
     }
   ]
 }

@@ -20,6 +20,7 @@ import {
 	useFetcher,
 	useFetchers,
 	useLoaderData,
+	useLocation,
 	useMatches,
 	useSubmit,
 } from '@remix-run/react'
@@ -115,7 +116,6 @@ export async function loader({ request }: DataFunctionArgs) {
 							id: true,
 							name: true,
 							username: true,
-							image: { select: { id: true } },
 							roles: {
 								select: {
 									name: true,
@@ -235,10 +235,12 @@ function Document({
 function App() {
 	const data = useLoaderData<typeof loader>()
 	const nonce = useNonce()
+	const location = useLocation()
+	const isProfile = location.pathname === '/profile'
 
 	return (
 		<Document nonce={nonce} env={data.ENV}>
-			<div className="flex h-[100dvh] flex-col p-[5%]">
+			<div className={`flex h-[100dvh] flex-col ${isProfile ? '' : 'p-[5%]'}`}>
 				<Outlet />
 			</div>
 		</Document>
