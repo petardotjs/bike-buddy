@@ -96,7 +96,7 @@ export default function CategoryRoute() {
 							: 'flex items-center justify-center rounded-md'
 					}}
 				>
-					<Icon className="h-[35px] w-[35px]" name="magnifying-glass" />
+					<Icon className="h-[35px] w-[35px]" name="arrows-exchange" />
 				</NavLink>
 				<NavLink
 					to="/shop"

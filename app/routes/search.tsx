@@ -1,7 +1,7 @@
 import { Icon } from '#app/components/ui/icon.tsx'
 import { prisma } from '#app/utils/db.server.ts'
 import { DataFunctionArgs, json } from '@remix-run/node'
-import { Form, useLoaderData, useSubmit } from '@remix-run/react'
+import { Form, Link, useLoaderData, useSubmit } from '@remix-run/react'
 import { useEffect, useRef, useState } from 'react'
 
 export async function loader({ request }: DataFunctionArgs) {
@@ -51,31 +51,21 @@ export default function SearchRoute() {
 	const submit = useSubmit()
 	const formRef = useRef(null)
 	const queries = typeof window !== 'undefined' ? getQueries() : []
-	console.log(queries)
 
 	return (
 		<div className="flex h-[100dvh] flex-col">
-			<header>
-				<div className="relative flex h-[50px] gap-[20px]">
-					{suggestions.length > 0 && (
-						<div className="absolute left-0 right-0 top-full bg-white p-[10px]">
-							{suggestions.map(suggestion => {
-								return (
-									<div className="flex items-center gap-[10px] p-[10px]">
-										<Icon name="magnifying-glass" />
-										<span>{suggestion.name}</span>
-									</div>
-								)
-							})}
-						</div>
-					)}
-					<Icon name="chevron-left" className="h-[25px] w-[25px]" />
+			<header className="flex items-center justify-between">
+				<div className="flex h-[50px] items-center gap-[20px]">
+					<Link to="..">
+						<Icon name="chevron-left" className="h-[25px] w-[25px]" />
+					</Link>
 					<Form className="flex gap-[20px]" method="GET" ref={formRef}>
 						<input
 							name="q"
 							type="text"
 							placeholder="Search items"
 							className="flex-grow  rounded-md border-[1px] border-gray-300 p-2 px-4"
+							autoFocus
 							onChange={() => {
 								submit(formRef.current)
 							}}
@@ -109,6 +99,18 @@ export default function SearchRoute() {
 				</div>
 			</header>
 			<main className="mt-[10px] flex-grow">
+				{suggestions.length > 0 && (
+					<div className="bg-white p-[10px]">
+						{suggestions.map(suggestion => {
+							return (
+								<div className="flex items-center gap-[10px] p-[10px]">
+									<Icon name="magnifying-glass" />
+									<span>{suggestion.name}</span>
+								</div>
+							)
+						})}
+					</div>
+				)}
 				<div>
 					<div className="flex items-center justify-between">
 						<span className="font-oswald text-lg font-bold">HISTORY</span>

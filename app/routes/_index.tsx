@@ -1,11 +1,18 @@
 import { Icon } from '#app/components/ui/icon.tsx'
+import { getUserId } from '#app/utils/auth.server.ts'
 import { prisma } from '#app/utils/db.server.ts'
-import { json, type MetaFunction } from '@remix-run/node'
-import { NavLink, useLoaderData } from '@remix-run/react'
+import {
+	json,
+	type MetaFunction,
+	DataFunctionArgs,
+	redirect,
+} from '@remix-run/node'
+import { Link, NavLink, useLoaderData } from '@remix-run/react'
+import appLogo from '#app/assets/app-logo.png'
 
 export const meta: MetaFunction = () => [{ title: 'Epic Notes' }]
 
-export async function loader() {
+export async function loader({ request }: DataFunctionArgs) {
 	const posts = await prisma.post.findMany({
 		select: {
 			id: true,
@@ -20,18 +27,37 @@ export async function loader() {
 		take: 2,
 	})
 
+	const userId = await getUserId(request)
+
+	const user = await prisma.user.findUnique({
+		where: {
+			id: userId ?? '',
+		},
+		select: {
+			id: true,
+			name: true,
+			balance: true,
+			image: {
+				select: {
+					id: true,
+				},
+			},
+		},
+	})
+
 	return json({
 		posts,
+		user,
 	})
 }
 
 export default function Index() {
-	const { posts } = useLoaderData<typeof loader>()
+	const { posts, user } = useLoaderData<typeof loader>()
 
 	return (
 		<main className="flex flex-grow flex-col justify-between">
 			<div className="flex items-center justify-between">
-				<span className="text-lg">bikebuddy</span>
+				<img src={appLogo} alt="App logo" className="h-[35px] w-[35px]" />
 				<div className="flex gap-[10px]">
 					<Icon name="heart" className="h-[3px] w-[30px]" />
 					<Icon name="shopping-cart" className="h-[30px] w-[30px]" />
@@ -39,21 +65,44 @@ export default function Index() {
 				</div>
 			</div>
 			<div className="flex gap-[20px]">
-				<input
-					type="text"
-					placeholder="Search items"
-					className="flex-grow  rounded-md border-[1px] border-gray-300 p-2 px-4"
-				/>
-				<button className="w-[50px] rounded-md  bg-orange-500">
+				<Link
+					to="/search"
+					className="flex-grow rounded-md border-[1px] border-gray-300 p-2 px-4"
+				>
+					<input type="text" placeholder="Search items" />
+				</Link>
+				<Link
+					to="search"
+					className="flex w-[50px]  items-center justify-center rounded-md bg-orange-500"
+				>
 					<Icon
 						className="h-[25px] w-[25px] text-white"
 						name="magnifying-glass"
 					/>
-				</button>
+				</Link>
 			</div>
-			<div className=" flex h-[100px] items-center justify-center bg-gray-100">
-				placeholder
-			</div>
+			{user ? (
+				<div className="flex h-[100px] items-center justify-center gap-[10px]">
+					<div className="flex h-[100%] w-[0] flex-grow flex-col items-center justify-center shadow-md shadow-gray-300">
+						<div>
+							<span className="text-sm">Wallet balance</span>
+							<span className="flex items-center gap-[5px] font-extrabold">
+								<Icon name="wallet" className="h-[25px] w-[25px]" /> $
+								{user.balance}
+							</span>
+						</div>
+					</div>
+					<div className="flex h-[100%] w-[0] flex-grow flex-col items-center justify-center shadow-md shadow-gray-300">
+						<div>
+							<span className="text-sm">Top up balance</span>
+							<span className="flex items-center gap-[5px] font-bold">
+								<Icon name="plus-circled" className="h-[25px] w-[25px]" /> Top
+								up
+							</span>
+						</div>
+					</div>
+				</div>
+			) : null}
 			<div>
 				<span className="font-oswald text-lg font-bold">
 					PICKING BY CATEGORY
@@ -126,7 +175,7 @@ export default function Index() {
 							: 'flex items-center justify-center rounded-md'
 					}}
 				>
-					<Icon className="h-[35px] w-[35px]" name="magnifying-glass" />
+					<Icon className="h-[35px] w-[35px]" name="arrows-exchange" />
 				</NavLink>
 				<NavLink
 					to="/shop"
