@@ -58,7 +58,7 @@ export default function Index() {
 				<span className="font-oswald text-lg font-bold">
 					PICKING BY CATEGORY
 				</span>
-				<div className="font-oswald flex gap-[10px] font-bold">
+				<div className="flex gap-[10px] font-oswald font-bold">
 					<div className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100">
 						<div className="flex flex-col gap-[5px]">
 							<Icon name="footprints" className="h-[35px] w-[35px]" />
@@ -96,7 +96,7 @@ export default function Index() {
 									src={`/images/${post.postImages[0].id}`}
 									className="flex-grow rounded-md object-cover object-center"
 								/>
-								<h2 className="font-oswald overflow-clip text-ellipsis whitespace-nowrap">
+								<h2 className="overflow-clip text-ellipsis whitespace-nowrap font-oswald">
 									{post.title.toUpperCase()}
 								</h2>
 								<span className="font-bold text-orange-500">
@@ -129,7 +129,7 @@ export default function Index() {
 					<Icon className="h-[35px] w-[35px]" name="magnifying-glass" />
 				</NavLink>
 				<NavLink
-					to="/ticket"
+					to="/shop"
 					className={({ isActive }) => {
 						return isActive
 							? 'flex w-[50px] items-center justify-center rounded-sm bg-orange-200 text-orange-500'

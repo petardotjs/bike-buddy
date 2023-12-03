@@ -145,7 +145,7 @@ export default function Profile() {
 						<Icon className="h-[35px] w-[35px]" name="magnifying-glass" />
 					</NavLink>
 					<NavLink
-						to="/ticket"
+						to="/shop"
 						className={({ isActive }) => {
 							return isActive
 								? 'flex w-[50px] items-center justify-center rounded-sm bg-orange-200 text-orange-500'

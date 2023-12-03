@@ -28,15 +28,33 @@ export async function loader({ params }: DataFunctionArgs) {
 			},
 		})
 
-		if (!image) {
-			throw json({ message: 'Image not found' }, { status: 404 })
-		}
+		if (image) {
+			return new Response(image.blob, {
+				headers: {
+					'Content-Type': image.contentType,
+				},
+			})
+		} else {
+			const image = await prisma.productImage.findUnique({
+				select: {
+					blob: true,
+					contentType: true,
+				},
+				where: {
+					id: params.imageId,
+				},
+			})
 
-		return new Response(image.blob, {
-			headers: {
-				'Content-Type': image.contentType,
-			},
-		})
+			if (image) {
+				return new Response(image.blob, {
+					headers: {
+						'Content-Type': image.contentType,
+					},
+				})
+			} else {
+				throw json({ message: 'Image not found' }, { status: 404 })
+			}
+		}
 	}
 
 	return new Response(image.blob, {
