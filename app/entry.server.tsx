@@ -32,6 +32,9 @@ const server = setupServer(
 	http.post(`http://localhost:3001/ping`, () => {
 		return passthrough()
 	}),
+	http.get('http://192.168.160.120:9669/api/sensorData', () => {
+		return passthrough()
+	}),
 )
 server.listen({
 	onUnhandledRequest: req => {

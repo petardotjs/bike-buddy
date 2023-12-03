@@ -57,10 +57,12 @@ export default function Index() {
 	return (
 		<main className="flex flex-grow flex-col justify-between">
 			<div className="flex items-center justify-between">
-				<img src={appLogo} alt="App logo" className="h-[35px] w-[35px]" />
+				<img src={appLogo} alt="App logo" className="h-[50px] w-[50px]" />
 				<div className="flex gap-[10px]">
 					<Icon name="heart" className="h-[3px] w-[30px]" />
-					<Icon name="shopping-cart" className="h-[30px] w-[30px]" />
+					<Link to="/shop">
+						<Icon name="shopping-cart" className="h-[30px] w-[30px]" />
+					</Link>
 					<Icon name="bell" className="h-[30px] w-[30px]" />
 				</div>
 			</div>
