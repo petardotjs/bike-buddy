@@ -18,7 +18,25 @@ export async function loader({ params }: DataFunctionArgs) {
 	})
 
 	if (!image) {
-		throw json({ message: 'Image not found' }, { status: 404 })
+		const image = await prisma.userImage.findUnique({
+			select: {
+				blob: true,
+				contentType: true,
+			},
+			where: {
+				id: params.imageId,
+			},
+		})
+
+		if (!image) {
+			throw json({ message: 'Image not found' }, { status: 404 })
+		}
+
+		return new Response(image.blob, {
+			headers: {
+				'Content-Type': image.contentType,
+			},
+		})
 	}
 
 	return new Response(image.blob, {

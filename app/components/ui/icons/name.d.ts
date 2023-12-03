@@ -8,6 +8,7 @@ export type IconName =
 	| 'footprints'
 	| 'gallery-horizontal'
 	| 'gear'
+	| 'google'
 	| 'heart'
 	| 'help-circle'
 	| 'home'

@@ -4,19 +4,19 @@ import { Icon } from '#app/components/ui/icon.tsx'
 import { StatusButton } from '#app/components/ui/status-button.tsx'
 import { useIsPending } from './misc.tsx'
 
-export const GITHUB_PROVIDER_NAME = 'github'
+export const GOOGLE_PROVIDER_SCHEMA = 'google'
 // to add another provider, set their name here and add it to the providerNames below
 
-export const providerNames = [GITHUB_PROVIDER_NAME] as const
+export const providerNames = [GOOGLE_PROVIDER_SCHEMA] as const
 export const ProviderNameSchema = z.enum(providerNames)
 export type ProviderName = z.infer<typeof ProviderNameSchema>
 
 export const providerLabels: Record<ProviderName, string> = {
-	[GITHUB_PROVIDER_NAME]: 'GitHub',
+	[GOOGLE_PROVIDER_SCHEMA]: 'Google',
 } as const
 
 export const providerIcons: Record<ProviderName, React.ReactNode> = {
-	[GITHUB_PROVIDER_NAME]: <Icon name="github-logo" />,
+	[GOOGLE_PROVIDER_SCHEMA]: <Icon name="google" fill="white" />,
 } as const
 
 export function ProviderConnectionForm({
@@ -42,7 +42,7 @@ export function ProviderConnectionForm({
 			) : null}
 			<StatusButton
 				type="submit"
-				className="w-full"
+				className="w-full bg-orange-500 text-white"
 				status={isPending ? 'pending' : 'idle'}
 			>
 				<span className="inline-flex items-center gap-1.5">

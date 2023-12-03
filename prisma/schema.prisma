@@ -16,6 +16,8 @@ model User {
   username String  @unique
   name     String?
   balance  Float   @default(0)
+  image    UserImage?
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -25,7 +27,19 @@ model User {
   roles       Role[]
   sessions    Session[]
   connections Connection[]
+}
 
+model UserImage {
+  id          String  @id @default(cuid())
+  altText     String?
+  contentType String
+  blob        Bytes
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
 }
 
 model Post {

@@ -16,6 +16,11 @@ export async function loader({ request }: DataFunctionArgs) {
 				id: true,
 				name: true,
 				balance: true,
+				image: {
+					select: {
+						id: true,
+					},
+				},
 			},
 		})
 
@@ -40,7 +45,7 @@ export default function Profile() {
 					</span>
 					<div className="relative top-[-1px] flex items-center gap-[20px] rounded-b-lg bg-orange-500 px-[5%] pb-[100px]">
 						<img
-							src="/user.png"
+							src={user.image?.id ? `/images/${user.image.id}` : '/user.png'}
 							alt="Default user avatar"
 							className="h-[50px] w-[50px] rounded-full border-[1px] border-gray-500"
 						/>
