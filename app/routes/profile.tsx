@@ -2,7 +2,7 @@ import { getUserId } from '#app/utils/auth.server.ts'
 import { DataFunctionArgs, json, redirect } from '@remix-run/node'
 import { Icon } from '../components/ui/icon.tsx'
 import { prisma } from '#app/utils/db.server.ts'
-import { useLoaderData, NavLink } from '@remix-run/react'
+import { useLoaderData, NavLink, Form } from '@remix-run/react'
 
 export async function loader({ request }: DataFunctionArgs) {
 	const userId = await getUserId(request)
@@ -41,7 +41,11 @@ export default function Profile() {
 				<header className="flex flex-col">
 					<span className="flex justify-end gap-[10px] bg-orange-500 px-[5%] pt-[5%] text-white">
 						<Icon name="shopping-cart" className="h-[25px] w-[25px]" />
-						<Icon name="gear" className="h-[25px] w-[25px]" />
+						<Form action="/logout" method="post">
+							<button>
+								<Icon name="gear" className="h-[25px] w-[25px]" />
+							</button>
+						</Form>
 					</span>
 					<div className="relative top-[-1px] flex items-center gap-[20px] rounded-b-lg bg-orange-500 px-[5%] pb-[100px]">
 						<img

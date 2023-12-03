@@ -33,6 +33,7 @@ export async function loader({ request }: DataFunctionArgs) {
 	return json({
 		trendingProducts,
 		suggestions,
+		query,
 	})
 }
 
@@ -46,8 +47,14 @@ function getQueries() {
 	}
 }
 
+const deleteALlQueries = () => {
+	localStorage.removeItem('queries')
+	location.reload()
+}
+
 export default function SearchRoute() {
-	const { trendingProducts, suggestions } = useLoaderData<typeof loader>()
+	const { trendingProducts, suggestions, query } =
+		useLoaderData<typeof loader>()
 	const submit = useSubmit()
 	const formRef = useRef(null)
 	const queries = typeof window !== 'undefined' ? getQueries() : []
@@ -62,6 +69,7 @@ export default function SearchRoute() {
 					<Form className="flex gap-[20px]" method="GET" ref={formRef}>
 						<input
 							name="q"
+							defaultValue={query ?? ''}
 							type="text"
 							placeholder="Search items"
 							className="flex-grow  rounded-md border-[1px] border-gray-300 p-2 px-4"
@@ -114,23 +122,30 @@ export default function SearchRoute() {
 				<div>
 					<div className="flex items-center justify-between">
 						<span className="font-oswald text-lg font-bold">HISTORY</span>
-						<span className="font-semibold text-orange-500">
+						<button
+							className="font-semibold text-orange-500"
+							onClick={deleteALlQueries}
+						>
 							<Icon name="trash" />
 							Delete all
-						</span>
+						</button>
 					</div>
 					<div>
-						{queries.map(query => {
-							return (
-								<div className="flex items-center justify-between p-[10px]">
-									<span className="flex gap-[15px]">
-										<Icon name="counter-clockwise-clock" />
-										<span>{query}</span>
-									</span>
-									<Icon name="cross-1" />
-								</div>
-							)
-						})}
+						{queries.length ? (
+							queries.map(query => {
+								return (
+									<div className="flex items-center justify-between p-[10px]">
+										<span className="flex gap-[15px]">
+											<Icon name="counter-clockwise-clock" />
+											<span>{query}</span>
+										</span>
+										<Icon name="cross-1" />
+									</div>
+								)
+							})
+						) : (
+							<span className="px-[10px]">No queries yet...</span>
+						)}
 					</div>
 				</div>
 				<div>

@@ -108,24 +108,33 @@ export default function Index() {
 					PICKING BY CATEGORY
 				</span>
 				<div className="flex gap-[10px] font-oswald font-bold">
-					<div className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100">
+					<Link
+						to="/shop/footwear"
+						className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100"
+					>
 						<div className="flex flex-col gap-[5px]">
 							<Icon name="footprints" className="h-[35px] w-[35px]" />
 							<span className="text-orange-500">FOOTWEAR</span>
 						</div>
-					</div>
-					<div className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100">
+					</Link>
+					<Link
+						to="/shop/bags"
+						className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100"
+					>
 						<div className="flex flex-col gap-[5px]">
 							<Icon name="shopping-bag" className="h-[35px] w-[35px]" />
 							<span className="text-orange-500">BAGS</span>
 						</div>
-					</div>
-					<div className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100">
+					</Link>
+					<Link
+						to="/shop/apparel"
+						className="flex h-[120px] w-[0] flex-grow items-center justify-center bg-gray-100"
+					>
 						<div className="flex flex-col gap-[5px]">
 							<Icon name="shirt" className="h-[35px] w-[35px]" />
 							<span className="text-orange-500">APPAREL</span>
 						</div>
-					</div>
+					</Link>
 				</div>
 			</div>
 			<div>
