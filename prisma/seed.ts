@@ -64,6 +64,9 @@ for (const category of categories) {
 						contentType: getMimeType(image),
 					},
 				},
+				createdAt: faker.date.past({
+					years: 1,
+				}),
 			},
 		})
 	}
