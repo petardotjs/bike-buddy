@@ -3,7 +3,9 @@
 export type IconName =
 	| 'bell'
 	| 'chat-bubble'
+	| 'chevron-left'
 	| 'counter-clockwise-clock'
+	| 'cross-1'
 	| 'filter'
 	| 'footprints'
 	| 'gallery-horizontal'
@@ -25,4 +27,5 @@ export type IconName =
 	| 'shopping-cart'
 	| 'star'
 	| 'ticket'
+	| 'trash'
 	| 'wallet'
